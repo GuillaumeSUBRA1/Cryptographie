@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Projet</string>
+    <string name="accueil">cryptographie</string>
+    <string name="Cesar">Cesar</string>
+    <string name="Vigenere">Vigenere</string>
+    <string name="Atbash">Atbash</string>
+    <string name="Playfair">Playfair</string>
+    <string name="Hill">Hill</string>
+    <string name="Delastelle">Delastelle</string>
+    <string name="chiffrer">chiffrer</string>
+    <string name="dechiffrer">dechiffrer</string>
+    <string name="TranspositionRectangulaire">TranspositionRectangulaire</string>
+</resources>
