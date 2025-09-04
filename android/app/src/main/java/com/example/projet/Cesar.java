@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/// chiffrer un message en décalant tous les codes ascii de N rangs vers la droite
+
 public class Cesar extends Activity {
 
     Button Chiffrer, Dechiffrer;
