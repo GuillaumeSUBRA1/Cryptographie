@@ -9,22 +9,70 @@ class Cesar extends StatefulWidget {
 
 class _CesarState extends State<Cesar> {
   TextEditingController messageController = TextEditingController();
+  TextEditingController messageChiffreController = TextEditingController();
   TextEditingController cleController = TextEditingController();
 
-  String message = "";
+  //fonction de chiffrement
 
+  //###########################//
+  //        A TESTER           //
+  //###########################//
   crypter() {
-    List<int> messageAscii = stringToAscii(messageController.text);
-    for (int i = 0; i < messageAscii.length; i++) {
-      messageAscii[i] = messageAscii[i] + int.parse(cleController.text);
+    String messageAChiffrer = messageController.text; // le message à chiffrer
+    String msgChiffre = ""; // le message chiffré
+
+    //si le champ de texte de la clé est vide, on arrête la fonction
+    if (cleController.text.isEmpty) {
+      return;
     }
+
+    //on récupère la clé
+    int cle = int.parse(cleController.text);
+
+    //on vérifie que la clef est supérieure à 0 et que le message à chiffrer n'est pas vide
+    if (messageAChiffrer.isNotEmpty && cle > 0) {
+      //pour chaque caractère du message
+      for (int i = 0; i < messageAChiffrer.length; i++) {
+        //on récupère le code ascii de la lettre à l'index i
+        int ascii = letterToAscii(messageAChiffrer[i]);
+
+        //si ce n'est pas une lettre, on ajoute le caractère à la suite du message chiffré
+        //et passe à la suivante
+        if (!isLetter(ascii)) {
+          msgChiffre += messageAChiffrer[i];
+          continue;
+        }
+
+        //variable pour vérifier s'il s'agit d'une majuscule
+        bool maj = ascii >= 65 && ascii <= 90;
+
+        //on ajoute la clé au code ascii
+        int toCesar = ascii + cle;
+
+        //s'il dépasse la limite, on le ramène au début en soustrayant la clé modulo 26
+        if (maj && toCesar > 90 || !maj && toCesar > 122) {
+          toCesar = toCesar - cle % 26;
+        }
+        //enfin, on ajoute au message chiffre le caractère correspondant au code ascii
+        msgChiffre += asciiToLetter(toCesar);
+      }
+    }
+
     setState(() {
-      message = String.fromCharCodes(messageAscii);
+      messageChiffreController.text = msgChiffre;
     });
   }
 
-  List<int> stringToAscii(String message) {
-    return message.codeUnits;
+  int letterToAscii(String lettre) {
+    return lettre.codeUnitAt(0);
+  }
+
+  String asciiToLetter(int ascii) {
+    return String.fromCharCode(ascii);
+  }
+
+  bool isLetter(int ascii) {
+    return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
   }
 
   @override
@@ -41,6 +89,7 @@ class _CesarState extends State<Cesar> {
           onChanged: (value) {
             crypter();
           },
+          decoration: const InputDecoration(hintText: "Message chiffré"),
         ))
       ]),
       Row(children: [
@@ -52,7 +101,13 @@ class _CesarState extends State<Cesar> {
         ),
       ]),
       Row(
-        children: [Expanded(child: Text(message))],
+        children: [
+          Expanded(
+              child: TextField(
+            controller: messageChiffreController,
+            decoration: const InputDecoration(hintText: "Message chiffré"),
+          ))
+        ],
       )
     ]));
   }
