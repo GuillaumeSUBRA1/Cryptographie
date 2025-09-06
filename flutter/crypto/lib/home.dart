@@ -1,3 +1,4 @@
+import 'package:crypto/techniques/cesar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,15 +9,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Cryptographie', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('CryptApp',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
-      body:const Text("Hello World"),
+      body: const Cesar(),
     );
   }
 }
