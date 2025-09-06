@@ -47,7 +47,7 @@ class _CesarState extends State<Cesar> {
         bool maj = ascii >= 65 && ascii <= 90;
 
         //on ajoute la clé au code ascii
-        int toCesar = ascii + cle;
+        int toCesar = ascii + cle % 26;
 
         //s'il dépasse la limite, on le ramène au début en soustrayant la clé modulo 26
         if (maj && toCesar > 90 || !maj && toCesar > 122) {
