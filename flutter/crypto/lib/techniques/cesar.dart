@@ -51,8 +51,9 @@ class _CesarState extends State<Cesar> {
 
         //s'il dépasse la limite, on le ramène au début en soustrayant la clé modulo 26
         if (maj && toCesar > 90 || !maj && toCesar > 122) {
-          toCesar = toCesar - cle % 26;
+          toCesar = toCesar - 26;
         }
+
         //enfin, on ajoute au message chiffre le caractère correspondant au code ascii
         msgChiffre += asciiToLetter(toCesar);
       }
@@ -89,16 +90,18 @@ class _CesarState extends State<Cesar> {
           onChanged: (value) {
             crypter();
           },
-          decoration: const InputDecoration(hintText: "Message chiffré"),
+          decoration: const InputDecoration(hintText: "Votre message"),
         ))
       ]),
       Row(children: [
-        TextField(
+        Expanded(
+            child: TextField(
           controller: cleController,
           onChanged: (value) {
             crypter();
           },
-        ),
+          decoration: const InputDecoration(hintText: "clé"),
+        )),
       ]),
       Row(
         children: [
