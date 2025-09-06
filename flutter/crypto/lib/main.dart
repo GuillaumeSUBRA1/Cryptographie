@@ -1,4 +1,4 @@
-import 'package:crypto/home/home.dart';
+import 'package:crypto/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,12 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      darkTheme: ThemeData.dark(useMaterial3: true),
+      theme: ThemeData(useMaterial3: true),
       home: const Home(),
     );
   }
 }
-
