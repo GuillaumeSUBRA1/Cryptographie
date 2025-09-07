@@ -79,39 +79,45 @@ class _CesarState extends State<Cesar> {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(children: [
-      const Row(
-        children: [Expanded(child: Text("Cesar"))],
-      ),
-      Row(children: [
-        Expanded(
-            child: TextField(
-          controller: messageController,
-          onChanged: (value) {
-            crypter();
-          },
-          decoration: const InputDecoration(hintText: "Votre message"),
-        ))
-      ]),
-      Row(children: [
-        Expanded(
-            child: TextField(
-          controller: cleController,
-          onChanged: (value) {
-            crypter();
-          },
-          decoration: const InputDecoration(hintText: "clé"),
-        )),
-      ]),
-      Row(
-        children: [
-          Expanded(
-              child: TextField(
-            controller: messageChiffreController,
-            decoration: const InputDecoration(hintText: "Message chiffré"),
-          ))
-        ],
-      )
-    ]));
+        child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(children: [
+              const Row(
+                children: [Expanded(child: Text("Cesar"))],
+              ),
+              Row(children: [
+                Expanded(
+                    child: TextField(
+                  controller: messageController,
+                  onChanged: (value) {
+                    crypter();
+                  },
+                  decoration: const InputDecoration(
+                      hintText: "Votre message", labelText: "Votre message"),
+                ))
+              ]),
+              Row(children: [
+                Expanded(
+                    child: TextField(
+                  controller: cleController,
+                  onChanged: (value) {
+                    crypter();
+                  },
+                  decoration:
+                      const InputDecoration(hintText: "clé", labelText: "clé"),
+                )),
+              ]),
+              Row(
+                children: [
+                  Expanded(
+                      child: TextField(
+                    controller: messageChiffreController,
+                    decoration: const InputDecoration(
+                        hintText: "Message chiffré",
+                        labelText: "Message chiffré"),
+                  ))
+                ],
+              )
+            ])));
   }
 }
