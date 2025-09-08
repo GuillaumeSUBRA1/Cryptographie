@@ -64,14 +64,17 @@ class _CesarState extends State<Cesar> {
     });
   }
 
+  //convertir la lettre en code ascii
   int letterToAscii(String lettre) {
     return lettre.codeUnitAt(0);
   }
 
+  //récupérer la lettre correspondante au code ascii
   String asciiToLetter(int ascii) {
     return String.fromCharCode(ascii);
   }
 
+  //vérifier si le code ascii correspond à une lettre
   bool isLetter(int ascii) {
     return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
   }
