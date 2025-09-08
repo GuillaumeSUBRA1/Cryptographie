@@ -8,17 +8,16 @@ class Cesar extends StatefulWidget {
 }
 
 class _CesarState extends State<Cesar> {
-  TextEditingController messageController = TextEditingController();
+  TextEditingController messageDechiffreController = TextEditingController();
   TextEditingController messageChiffreController = TextEditingController();
   TextEditingController cleController = TextEditingController();
 
-  //fonction de chiffrement
+  bool chiffre = true;
 
-  //###########################//
-  //        A TESTER           //
-  //###########################//
+  //fonction de chiffrement
   crypter() {
-    String messageAChiffrer = messageController.text; // le message à chiffrer
+    String messageAChiffrer =
+        messageDechiffreController.text; // le message à chiffrer
     String msgChiffre = ""; // le message chiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
@@ -65,6 +64,57 @@ class _CesarState extends State<Cesar> {
     });
   }
 
+  //A TESTER
+  //fonction de déchiffrement
+  decrypter() {
+    String messageADechiffrer =
+        messageChiffreController.text; // le message à déchiffrer
+    String msgDechiffre = ""; // le message déchiffré
+
+    //si le champ de texte de la clé est vide, on arrête la fonction
+    if (cleController.text.isEmpty) {
+      return;
+    }
+
+    //on récupère la clé
+    int cle = int.parse(cleController.text);
+
+    //on vérifie que la clef est supérieure à 0 et que le message à déchiffrer n'est pas vide
+    if (messageADechiffrer.isNotEmpty && cle > 0) {
+      //pour chaque caractère du message chiffré
+      for (int i = 0; i < messageADechiffrer.length; i++) {
+        //on récupère le code ascii de la lettre à l'index i
+        int ascii = letterToAscii(messageADechiffrer[i]);
+
+        //si ce n'est pas une lettre, on ajoute le caractère à la suite du message déchiffré
+        //et passe à la suivante
+        if (!isLetter(ascii)) {
+          msgDechiffre += messageADechiffrer[i];
+          continue;
+        }
+
+        //variable pour vérifier s'il s'agit d'une majuscule
+        bool maj = ascii >= 65 && ascii <= 90;
+
+        //on retire la clé au code ascii
+        int toCesar = ascii - cle % 26;
+
+        //s'il dépasse la limite, on le ramène à la fin en sajoutant 26 jusqu'à
+        // ce qu'il soit supérieur à la limite
+        while (maj && toCesar > 65 || !maj && toCesar < 97) {
+          toCesar = toCesar + 26;
+        }
+
+        //enfin, on ajoute au message déchiffre le caractère correspondant au code ascii
+        msgDechiffre += asciiToLetter(toCesar);
+      }
+    }
+
+    setState(() {
+      messageDechiffreController.text = msgDechiffre;
+    });
+  }
+
   //convertir la lettre en code ascii
   int letterToAscii(String lettre) {
     return lettre.codeUnitAt(0);
@@ -87,14 +137,16 @@ class _CesarState extends State<Cesar> {
             padding: const EdgeInsets.all(10),
             child: Column(children: [
               const Row(
-                children: [Expanded(child: Text("Cesar"))],
+                children: [
+                  Expanded(child: Text("Cesar")),
+                ],
               ),
               Row(children: [
                 Expanded(
                     child: TextField(
-                  controller: messageController,
+                  controller: messageDechiffreController,
                   onChanged: (value) {
-                    crypter();
+                    chiffre ? crypter() : decrypter();
                   },
                   decoration: const InputDecoration(
                       hintText: "Votre message", labelText: "Votre message"),
@@ -104,8 +156,9 @@ class _CesarState extends State<Cesar> {
                 Expanded(
                     child: TextField(
                   controller: cleController,
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
-                    crypter();
+                    chiffre ? crypter() : decrypter();
                   },
                   decoration:
                       const InputDecoration(hintText: "clé", labelText: "clé"),
@@ -116,10 +169,17 @@ class _CesarState extends State<Cesar> {
                   Expanded(
                       child: TextField(
                     controller: messageChiffreController,
-                    decoration: const InputDecoration(
-                        hintText: "Message chiffré",
-                        labelText: "Message chiffré"),
+                    decoration: InputDecoration(
+                        hintText: "Message ${chiffre ? "dé" : ""}chiffré",
+                        labelText: "Message ${chiffre ? "dé" : ""}chiffré"),
                   ))
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child:
+                          Card(child: Text("${chiffre ? "dé" : ""}chiffrer")))
                 ],
               )
             ])));
