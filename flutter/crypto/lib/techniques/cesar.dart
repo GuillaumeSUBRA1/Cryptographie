@@ -16,7 +16,7 @@ class _CesarState extends State<Cesar> {
 
   //fonction de chiffrement
   crypter() {
-    String messageAChiffrer =
+    final messageAChiffrer =
         messageDechiffreController.text; // le message à chiffrer
     String msgChiffre = ""; // le message chiffré
 
@@ -26,14 +26,14 @@ class _CesarState extends State<Cesar> {
     }
 
     //on récupère la clé
-    int cle = int.parse(cleController.text);
+    final cle = int.parse(cleController.text);
 
     //on vérifie que la clef est supérieure à 0 et que le message à chiffrer n'est pas vide
     if (messageAChiffrer.isNotEmpty && cle > 0) {
       //pour chaque caractère du message
       for (int i = 0; i < messageAChiffrer.length; i++) {
         //on récupère le code ascii de la lettre à l'index i
-        int ascii = letterToAscii(messageAChiffrer[i]);
+        final ascii = letterToAscii(messageAChiffrer[i]);
 
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message chiffré
         //et passe à la suivante
@@ -51,7 +51,7 @@ class _CesarState extends State<Cesar> {
         //s'il dépasse la limite, on le ramène au début en soustrayant 26 jusqu'à
         // ce qu'il soit inférieur à la limite
         while (maj && toCesar > 90 || !maj && toCesar > 122) {
-          toCesar = toCesar - 26;
+          toCesar -= 26;
         }
 
         //enfin, on ajoute au message chiffre le caractère correspondant au code ascii
@@ -67,7 +67,7 @@ class _CesarState extends State<Cesar> {
   //A TESTER
   //fonction de déchiffrement
   decrypter() {
-    String messageADechiffrer =
+    final messageADechiffrer =
         messageChiffreController.text; // le message à déchiffrer
     String msgDechiffre = ""; // le message déchiffré
 
@@ -77,14 +77,14 @@ class _CesarState extends State<Cesar> {
     }
 
     //on récupère la clé
-    int cle = int.parse(cleController.text);
+    final cle = int.parse(cleController.text);
 
     //on vérifie que la clef est supérieure à 0 et que le message à déchiffrer n'est pas vide
     if (messageADechiffrer.isNotEmpty && cle > 0) {
       //pour chaque caractère du message chiffré
       for (int i = 0; i < messageADechiffrer.length; i++) {
         //on récupère le code ascii de la lettre à l'index i
-        int ascii = letterToAscii(messageADechiffrer[i]);
+        final ascii = letterToAscii(messageADechiffrer[i]);
 
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message déchiffré
         //et passe à la suivante
@@ -102,7 +102,7 @@ class _CesarState extends State<Cesar> {
         //s'il dépasse la limite, on le ramène à la fin en sajoutant 26 jusqu'à
         // ce qu'il soit supérieur à la limite
         while (maj && toCesar > 65 || !maj && toCesar < 97) {
-          toCesar = toCesar + 26;
+          toCesar += 26;
         }
 
         //enfin, on ajoute au message déchiffre le caractère correspondant au code ascii
