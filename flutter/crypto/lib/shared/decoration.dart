@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Decoration pour les textfield
 textFieldDecoration(Widget child, double s) {
   return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
