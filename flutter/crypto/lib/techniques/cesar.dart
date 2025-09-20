@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../shared/decoration.dart';
+
 class Cesar extends StatefulWidget {
   const Cesar({super.key});
 
@@ -68,7 +70,7 @@ class _CesarState extends State<Cesar> {
   //fonction de déchiffrement
   decrypter() {
     final messageADechiffrer =
-        messageChiffreController.text; // le message à déchiffrer
+        messageDechiffreController.text; // le message à déchiffrer
     String msgDechiffre = ""; // le message déchiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
@@ -111,7 +113,7 @@ class _CesarState extends State<Cesar> {
     }
 
     setState(() {
-      messageDechiffreController.text = msgDechiffre;
+      messageChiffreController.text = msgDechiffre;
     });
   }
 
@@ -132,54 +134,101 @@ class _CesarState extends State<Cesar> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Center(
         child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(children: [
               const Row(
                 children: [
-                  Expanded(child: Text("Cesar")),
+                  Expanded(
+                      child: Text(
+                    "Cesar",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
                 ],
               ),
+              const SizedBox(height: 10),
               Row(children: [
                 Expanded(
-                    child: TextField(
-                  controller: messageDechiffreController,
-                  onChanged: (value) {
-                    chiffre ? crypter() : decrypter();
-                  },
-                  decoration: const InputDecoration(
-                      hintText: "Votre message", labelText: "Votre message"),
-                ))
+                    child: textFieldDecoration(
+                        TextField(
+                          controller: messageDechiffreController,
+                          onTapOutside: (_) =>
+                              FocusManager.instance.primaryFocus?.unfocus(),
+                          onChanged: (value) {
+                            chiffre ? crypter() : decrypter();
+                          },
+                          decoration: const InputDecoration(
+                            hintText: "Votre message",
+                            labelText: "Votre message",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                        width)),
               ]),
+              const SizedBox(height: 10),
               Row(children: [
                 Expanded(
-                    child: TextField(
-                  controller: cleController,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    chiffre ? crypter() : decrypter();
-                  },
-                  decoration:
-                      const InputDecoration(hintText: "clé", labelText: "clé"),
-                )),
+                    child: textFieldDecoration(
+                        TextField(
+                          controller: cleController,
+                          onTapOutside: (_) =>
+                              FocusManager.instance.primaryFocus?.unfocus(),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            chiffre ? crypter() : decrypter();
+                          },
+                          decoration: const InputDecoration(
+                            hintText: "Clé",
+                            labelText: "Clé",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                        width)),
               ]),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
-                      child: TextField(
-                    controller: messageChiffreController,
-                    decoration: InputDecoration(
-                        hintText: "Message ${chiffre ? "dé" : ""}chiffré",
-                        labelText: "Message ${chiffre ? "dé" : ""}chiffré"),
-                  ))
+                      child: textFieldDecoration(
+                          TextField(
+                            controller: messageChiffreController,
+                            onTapOutside: (_) =>
+                                FocusManager.instance.primaryFocus?.unfocus(),
+                            decoration: InputDecoration(
+                              hintText: "Message ${chiffre ? "dé" : ""}chiffré",
+                              labelText:
+                                  "Message ${chiffre ? "dé" : ""}chiffré",
+                              border: InputBorder.none,
+                            ),
+                          ),
+                          width))
                 ],
               ),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
-                      child:
-                          Card(child: Text("${chiffre ? "dé" : ""}chiffrer")))
+                      child: GestureDetector(
+                          child: Card(
+                              color: Colors.blue,
+                              child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  child: Text(
+                                    "${chiffre ? "dé" : ""}chiffrer",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ))),
+                          onTap: () {
+                            setState(() {
+                              chiffre = !chiffre;
+                              chiffre ? decrypter() : crypter();
+                            });
+                          }))
                 ],
               )
             ])));

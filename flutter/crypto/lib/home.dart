@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CryptApp',
-            style: TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
       ),
       body: const Cesar(),
     );
