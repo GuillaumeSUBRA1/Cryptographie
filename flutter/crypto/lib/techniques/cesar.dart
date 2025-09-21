@@ -31,22 +31,19 @@ class _CesarState extends State<Cesar> {
     //on vérifie que la clef est supérieure à 0 et que le message à chiffrer n'est pas vide
     if (messageAChiffrer.isNotEmpty && cle > 0) {
       //pour chaque caractère du message
-      for (int i = 0; i < messageAChiffrer.length; i++) {
-        //on récupère le code ascii de la lettre à l'index i
-        final ascii = letterToAscii(messageAChiffrer[i]);
-
+      for (var char in messageAChiffrer.codeUnits) {
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message chiffré
         //et passe à la suivante
-        if (!isLetter(ascii)) {
-          msgChiffre.write(messageAChiffrer[i]);
+        if (!isLetter(char)) {
+          msgChiffre.write(char);
           continue;
         }
 
         //variable pour vérifier s'il s'agit d'une majuscule
-        bool maj = ascii >= 65 && ascii <= 90;
+        bool maj = char >= 65 && char <= 90;
 
         //on ajoute la clé au code ascii
-        int toCesar = ascii + cle % 26;
+        int toCesar = char + cle % 26;
 
         //s'il dépasse la limite, on le ramène au début en soustrayant 26 jusqu'à
         // ce qu'il soit inférieur à la limite
@@ -80,22 +77,19 @@ class _CesarState extends State<Cesar> {
     //on vérifie que la clef est supérieure à 0 et que le message à déchiffrer n'est pas vide
     if (messageADechiffrer.isNotEmpty && cle > 0) {
       //pour chaque caractère du message chiffré
-      for (int i = 0; i < messageADechiffrer.length; i++) {
-        //on récupère le code ascii de la lettre à l'index i
-        final ascii = letterToAscii(messageADechiffrer[i]);
-
+      for (var char in messageADechiffrer.codeUnits) {
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message déchiffré
         //et passe à la suivante
-        if (!isLetter(ascii)) {
-          msgDechiffre.write(messageADechiffrer[i]);
+        if (!isLetter(char)) {
+          msgDechiffre.write(char);
           continue;
         }
 
         //variable pour vérifier s'il s'agit d'une majuscule
-        bool maj = ascii >= 65 && ascii <= 90;
+        bool maj = char >= 65 && char <= 90;
 
         //on retire la clé au code ascii
-        int toCesar = ascii - cle % 26;
+        int toCesar = char - cle % 26;
 
         //s'il dépasse la limite, on le ramène à la fin en sajoutant 26 jusqu'à
         // ce qu'il soit supérieur à la limite
