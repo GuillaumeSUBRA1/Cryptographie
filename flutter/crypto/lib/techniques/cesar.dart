@@ -197,9 +197,9 @@ class _CesarState extends State<Cesar> {
                             onTapOutside: (_) =>
                                 FocusManager.instance.primaryFocus?.unfocus(),
                             decoration: InputDecoration(
-                              hintText: "Message ${chiffre ? "dé" : ""}chiffré",
+                              hintText: "Message ${chiffre ? "" : "dé"}chiffré",
                               labelText:
-                                  "Message ${chiffre ? "dé" : ""}chiffré",
+                                  "Message ${chiffre ? "" : "dé"}chiffré",
                               border: InputBorder.none,
                             ),
                           ),
