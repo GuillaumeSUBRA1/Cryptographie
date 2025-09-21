@@ -23,9 +23,7 @@ class _CesarState extends State<Cesar> {
     StringBuffer msgChiffre = StringBuffer(); // le message chiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
-    if (cleController.text.isEmpty) {
-      return;
-    }
+    if (cleController.text.isEmpty) return;
 
     //on récupère la clé
     final cle = int.parse(cleController.text);
@@ -74,9 +72,7 @@ class _CesarState extends State<Cesar> {
     StringBuffer msgDechiffre = StringBuffer(); // le message déchiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
-    if (cleController.text.isEmpty) {
-      return;
-    }
+    if (cleController.text.isEmpty) return;
 
     //on récupère la clé
     final cle = int.parse(cleController.text);
