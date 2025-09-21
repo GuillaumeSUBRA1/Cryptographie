@@ -52,7 +52,7 @@ class _CesarState extends State<Cesar> {
         }
 
         //enfin, on ajoute au message chiffre le caractère correspondant au code ascii
-        msgChiffre.write(asciiToLetter(toCesar));
+        msgChiffre.writeCharCode(toCesar);
       }
     }
 
@@ -98,23 +98,13 @@ class _CesarState extends State<Cesar> {
         }
 
         //enfin, on ajoute au message déchiffre le caractère correspondant au code ascii
-        msgDechiffre.write(asciiToLetter(toCesar));
+        msgDechiffre.writeCharCode(toCesar);
       }
     }
 
     setState(() {
       messageChiffreController.text = msgDechiffre.toString();
     });
-  }
-
-  //convertir la lettre en code ascii
-  int letterToAscii(String lettre) {
-    return lettre.codeUnitAt(0);
-  }
-
-  //récupérer la lettre correspondante au code ascii
-  String asciiToLetter(int ascii) {
-    return String.fromCharCode(ascii);
   }
 
   //vérifier si le code ascii correspond à une lettre
