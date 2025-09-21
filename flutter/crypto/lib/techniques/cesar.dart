@@ -224,10 +224,8 @@ class _CesarState extends State<Cesar> {
                                         fontWeight: FontWeight.bold),
                                   ))),
                           onTap: () {
-                            setState(() {
-                              chiffre = !chiffre;
-                              chiffre ? decrypter() : crypter();
-                            });
+                            chiffre = !chiffre;
+                            chiffre ? crypter() : decrypter();
                           }))
                 ],
               )
