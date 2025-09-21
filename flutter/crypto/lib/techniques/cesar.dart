@@ -20,7 +20,7 @@ class _CesarState extends State<Cesar> {
   crypter() {
     final messageAChiffrer =
         messageDechiffreController.text; // le message à chiffrer
-    String msgChiffre = ""; // le message chiffré
+    StringBuffer msgChiffre = StringBuffer(); // le message chiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
     if (cleController.text.isEmpty) {
@@ -40,7 +40,7 @@ class _CesarState extends State<Cesar> {
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message chiffré
         //et passe à la suivante
         if (!isLetter(ascii)) {
-          msgChiffre += messageAChiffrer[i];
+          msgChiffre.write(messageAChiffrer[i]);
           continue;
         }
 
@@ -57,12 +57,12 @@ class _CesarState extends State<Cesar> {
         }
 
         //enfin, on ajoute au message chiffre le caractère correspondant au code ascii
-        msgChiffre += asciiToLetter(toCesar);
+        msgChiffre.write(asciiToLetter(toCesar));
       }
     }
 
     setState(() {
-      messageChiffreController.text = msgChiffre;
+      messageChiffreController.text = msgChiffre.toString();
     });
   }
 
@@ -71,7 +71,7 @@ class _CesarState extends State<Cesar> {
   decrypter() {
     final messageADechiffrer =
         messageDechiffreController.text; // le message à déchiffrer
-    String msgDechiffre = ""; // le message déchiffré
+    StringBuffer msgDechiffre = StringBuffer(); // le message déchiffré
 
     //si le champ de texte de la clé est vide, on arrête la fonction
     if (cleController.text.isEmpty) {
@@ -91,7 +91,7 @@ class _CesarState extends State<Cesar> {
         //si ce n'est pas une lettre, on ajoute le caractère à la suite du message déchiffré
         //et passe à la suivante
         if (!isLetter(ascii)) {
-          msgDechiffre += messageADechiffrer[i];
+          msgDechiffre.write(messageADechiffrer[i]);
           continue;
         }
 
@@ -108,12 +108,12 @@ class _CesarState extends State<Cesar> {
         }
 
         //enfin, on ajoute au message déchiffre le caractère correspondant au code ascii
-        msgDechiffre += asciiToLetter(toCesar);
+        msgDechiffre.write(asciiToLetter(toCesar));
       }
     }
 
     setState(() {
-      messageChiffreController.text = msgDechiffre;
+      messageChiffreController.text = msgDechiffre.toString();
     });
   }
 
