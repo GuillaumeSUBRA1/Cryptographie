@@ -47,3 +47,8 @@ bool isLetter(int ascii) {
 bool isUpper(int char) {
   return char >= 65 && char <= 90;
 }
+
+/// verifier si le code ascii correspond à une lettre minuscule
+bool isLower(int char) {
+  return char >= 97 && char <= 122;
+}

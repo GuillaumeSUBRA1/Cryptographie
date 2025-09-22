@@ -41,7 +41,7 @@ class _CesarState extends State<Cesar> {
         }
 
         //variable pour vérifier s'il s'agit d'une majuscule
-        bool maj = char >= 65 && char <= 90;
+        bool maj = isUpper(char);
 
         //on ajoute la clé au code ascii
         int toCesar = char + cle % 26;
@@ -87,7 +87,7 @@ class _CesarState extends State<Cesar> {
         }
 
         //variable pour vérifier s'il s'agit d'une majuscule
-        bool maj = char >= 65 && char <= 90;
+        bool maj = isUpper(char);
 
         //on retire la clé au code ascii
         int toCesar = char - cle % 26;

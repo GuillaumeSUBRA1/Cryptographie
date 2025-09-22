@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared/decoration.dart';
+import '../shared/utils.dart';
 
 class Atbash extends StatefulWidget {
   const Atbash({super.key});
@@ -29,10 +30,10 @@ class _Atbash extends State<Atbash> {
     }
 
     for (var char in messageAChiffrer.codeUnits) {
-      if (char >= 65 && char <= 90) {
+      if (isUpper(char)) {
         // Majuscules A-Z → Z-A
         msgChiffre.writeCharCode(65 + (90 - char));
-      } else if (char >= 97 && char <= 122) {
+      } else if (isLower(char)) {
         // Minuscules a-z → z-a
         msgChiffre.writeCharCode(97 + (122 - char));
       } else {
