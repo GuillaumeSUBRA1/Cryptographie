@@ -1,6 +1,7 @@
 enum TechniqueCrypto {
   cesar("Cesar"),
-  atbash("Atbash");
+  atbash("Atbash"),
+  vigenere("Vigenere");
 
   final String titre;
 
