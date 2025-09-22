@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared/decoration.dart';
+import '../shared/utils.dart';
 
 class Cesar extends StatefulWidget {
   const Cesar({super.key});
@@ -105,11 +106,6 @@ class _CesarState extends State<Cesar> {
     setState(() {
       messageChiffreController.text = msgDechiffre.toString();
     });
-  }
-
-  //vérifier si le code ascii correspond à une lettre
-  bool isLetter(int ascii) {
-    return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
   }
 
   @override
