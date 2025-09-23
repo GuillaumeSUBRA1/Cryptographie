@@ -111,100 +111,96 @@ class _CesarState extends State<Cesar> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Center(
-        child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(children: [
-              const Row(
-                children: [
-                  Expanded(
-                      child: Text(
-                    "Cesar",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  )),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(children: [
-                Expanded(
-                    child: textFieldDecoration(
-                        TextField(
-                          controller: messageDechiffreController,
-                          onTapOutside: (_) =>
-                              FocusManager.instance.primaryFocus?.unfocus(),
-                          onChanged: (value) {
-                            chiffre ? crypter() : decrypter();
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "Votre message",
-                            labelText: "Votre message",
-                            border: InputBorder.none,
-                          ),
+    return Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(children: [
+          const Row(
+            children: [
+              Expanded(
+                  child: Text(
+                "Cesar",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(children: [
+            Expanded(
+                child: textFieldDecoration(
+                    TextField(
+                      controller: messageDechiffreController,
+                      onTapOutside: (_) =>
+                          FocusManager.instance.primaryFocus?.unfocus(),
+                      onChanged: (value) {
+                        chiffre ? crypter() : decrypter();
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Votre message",
+                        labelText: "Votre message",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width)),
+          ]),
+          const SizedBox(height: 10),
+          Row(children: [
+            Expanded(
+                child: textFieldDecoration(
+                    TextField(
+                      controller: cleController,
+                      onTapOutside: (_) =>
+                          FocusManager.instance.primaryFocus?.unfocus(),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        chiffre ? crypter() : decrypter();
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Clé",
+                        labelText: "Clé",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                    width)),
+          ]),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                  child: textFieldDecoration(
+                      TextField(
+                        controller: messageChiffreController,
+                        onTapOutside: (_) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
+                        decoration: InputDecoration(
+                          hintText: "Message ${chiffre ? "" : "dé"}chiffré",
+                          labelText: "Message ${chiffre ? "" : "dé"}chiffré",
+                          border: InputBorder.none,
                         ),
-                        width)),
-              ]),
-              const SizedBox(height: 10),
-              Row(children: [
-                Expanded(
-                    child: textFieldDecoration(
-                        TextField(
-                          controller: cleController,
-                          onTapOutside: (_) =>
-                              FocusManager.instance.primaryFocus?.unfocus(),
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            chiffre ? crypter() : decrypter();
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "Clé",
-                            labelText: "Clé",
-                            border: InputBorder.none,
-                          ),
-                        ),
-                        width)),
-              ]),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                      child: textFieldDecoration(
-                          TextField(
-                            controller: messageChiffreController,
-                            onTapOutside: (_) =>
-                                FocusManager.instance.primaryFocus?.unfocus(),
-                            decoration: InputDecoration(
-                              hintText: "Message ${chiffre ? "" : "dé"}chiffré",
-                              labelText:
-                                  "Message ${chiffre ? "" : "dé"}chiffré",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                          width))
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                      child: GestureDetector(
-                          child: Card(
-                              color: Colors.blue,
-                              child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    "${chiffre ? "dé" : ""}chiffrer",
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ))),
-                          onTap: () {
-                            chiffre = !chiffre;
-                            chiffre ? crypter() : decrypter();
-                          }))
-                ],
-              )
-            ])));
+                      ),
+                      width))
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                  child: GestureDetector(
+                      child: Card(
+                          color: Colors.blue,
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Text(
+                                "${chiffre ? "dé" : ""}chiffrer",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ))),
+                      onTap: () {
+                        chiffre = !chiffre;
+                        chiffre ? crypter() : decrypter();
+                      }))
+            ],
+          )
+        ]));
   }
 }
