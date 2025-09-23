@@ -39,16 +39,11 @@ String removeAccents(String input) {
 }
 
 /// vérifier si le code ascii correspond à une lettre
-bool isLetter(int ascii) {
-  return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
-}
+bool isLetter(int ascii) =>
+    (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
 
 /// verifier si le code ascii correspond à une lettre majuscule
-bool isUpper(int char) {
-  return char >= 65 && char <= 90;
-}
+bool isUpper(int char) => char >= 65 && char <= 90;
 
 /// verifier si le code ascii correspond à une lettre minuscule
-bool isLower(int char) {
-  return char >= 97 && char <= 122;
-}
+bool isLower(int char) => char >= 97 && char <= 122;
