@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Decoration pour les textfield
 textFieldDecoration(Widget child, double size) {
   return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size * 0.8,
       decoration: BoxDecoration(
