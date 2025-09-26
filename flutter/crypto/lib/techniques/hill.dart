@@ -110,6 +110,20 @@ class _HillState extends State<Hill> {
     );
   }
 
+  // Complète le message avec des 'X' pour qu'il soit un multiple de [blockSize]
+  padMessage() {
+    String clean = messageDechiffreController.text
+        .toUpperCase()
+        .replaceAll(RegExp(r'[^A-Z]'), '');
+    int remainder = clean.length % 4;
+    if (remainder == 0) return clean;
+    int padding = 4 - remainder;
+
+    setState(() {
+      messageDechiffreController.text += 'X' * padding;
+    });
+  }
+
   cleanKey() {
     setState(() {
       aCleController.clear();
@@ -141,8 +155,10 @@ class _HillState extends State<Hill> {
                 child: textFieldDecoration(
                     TextField(
                       controller: messageDechiffreController,
-                      onTapOutside: (_) =>
-                          FocusManager.instance.primaryFocus?.unfocus(),
+                      onTapOutside: (_) => {
+                        FocusManager.instance.primaryFocus?.unfocus(),
+                        padMessage()
+                      },
                       onChanged: (value) {
                         calculate(chiffre);
                       },
