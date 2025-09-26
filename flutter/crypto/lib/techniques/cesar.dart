@@ -62,7 +62,6 @@ class _CesarState extends State<Cesar> {
     });
   }
 
-  //A TESTER
   //fonction de déchiffrement
   decrypter() {
     final messageADechiffrer =

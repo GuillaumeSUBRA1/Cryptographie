@@ -64,7 +64,6 @@ class _VigenereState extends State<Vigenere> {
     });
   }
 
-  //A TESTER
   //fonction de déchiffrement
   decrypter() {
     final messageADechiffrer = removeAccents(
