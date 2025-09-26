@@ -1,6 +1,7 @@
 import 'package:crypto/shared/enum/technique_crypto.dart';
 import 'package:crypto/techniques/atbash.dart';
 import 'package:crypto/techniques/cesar.dart';
+import 'package:crypto/techniques/hill.dart';
 import 'package:crypto/techniques/vigenere.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,9 @@ class _HomeState extends State<Home> {
         break;
       case 2:
         page = const Vigenere();
+        break;
+      case 3:
+        page = const Hill();
         break;
     }
     setState(() {});
